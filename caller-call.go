@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (c *HttpCaller[Request, Response]) Call() (*Response, error) {
+func (c *HttpCaller[RequestType, ResponseType]) Call() (*Response[ResponseType], error) {
 	url := c.handleParams()
 	if c.Debug {
 		fmt.Println("[DEBUG] URL:", url)
@@ -60,8 +60,8 @@ func (c *HttpCaller[Request, Response]) Call() (*Response, error) {
 		fmt.Println("[DEBUG] Response:", string(body))
 	}
 
-	var response Response
-	err = json.Unmarshal(body, &response)
+	var responseBody ResponseType
+	err = json.Unmarshal(body, &responseBody)
 	if err != nil {
 		if c.Debug {
 			fmt.Println("[DEBUG] Error unmarshalling response:", err)
@@ -69,7 +69,11 @@ func (c *HttpCaller[Request, Response]) Call() (*Response, error) {
 		return nil, err
 	}
 
-	return &response, nil
+	return &Response[ResponseType]{
+		HttpStatus:  resp.StatusCode,
+		RawResponse: string(body),
+		Data:        &responseBody,
+	}, nil
 }
 
 func (c *HttpCaller[Request, Response]) handleParams() (url string) {
