@@ -23,7 +23,18 @@ func (c *HttpCaller[RequestType, ResponseType]) Call() (*Response[ResponseType],
 			}
 			return nil, err
 		}
+		if c.Debug {
+			fmt.Println("[DEBUG] Request body:", string(json))
+		}
 		requestBody = bytes.NewReader(json)
+	} else {
+		if c.Debug {
+			fmt.Println("[DEBUG] No request body")
+		}
+	}
+
+	if c.Debug {
+		fmt.Println("[DEBUG] Request:", c.Method, url)
 	}
 
 	req, err := http.NewRequest(c.Method, url, requestBody)
@@ -36,6 +47,9 @@ func (c *HttpCaller[RequestType, ResponseType]) Call() (*Response[ResponseType],
 
 	for k, v := range c.Headers {
 		req.Header.Set(k, fmt.Sprintf("%v", v))
+		if c.Debug {
+			fmt.Println("[DEBUG] Header:", k, v)
+		}
 	}
 
 	client := &http.Client{}
