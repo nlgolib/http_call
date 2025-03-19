@@ -45,7 +45,6 @@ type HttpCaller[Request any, Response any] struct {
 	Headers map[string]any
 	Params  map[string]any
 	Request *Request
-	Debug   bool
 }
 
 func (c *HttpCaller[Request, Response]) AddHeader(key string, value any) {
