@@ -1,0 +1,4 @@
+github.com/nlgolib/env v1.0.0 h1:BnwGVjY/bcelDRCBMe2xW2ZhUJ3NRveViE0tCbeBxks=
+github.com/nlgolib/env v1.0.0/go.mod h1:4GABCe5IcQFJ3SGBGBPHqZoHqnmNm1gmrD1YBeUFS/s=
+github.com/nlgolib/logger v1.0.1 h1:w6cJRX0kxR4460/pXsqJRB1dRD530uorUPIBUl8M0lw=
+github.com/nlgolib/logger v1.0.1/go.mod h1:oN//4iEwugJzi+vQO5zvxthwoiht7GpSTXIFPjhifVQ=
