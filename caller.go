@@ -30,6 +30,15 @@ func PutCaller[Request any, Response any](url string) *HttpCaller[Request, Respo
 	}
 }
 
+func PatchCaller[Request any, Response any](url string) *HttpCaller[Request, Response] {
+	return &HttpCaller[Request, Response]{
+		URL:     url,
+		Method:  http.MethodPatch,
+		Headers: make(map[string]any),
+		Params:  make(map[string]any),
+	}
+}
+
 func DeleteCaller[Request any, Response any](url string) *HttpCaller[Request, Response] {
 	return &HttpCaller[Request, Response]{
 		URL:     url,
